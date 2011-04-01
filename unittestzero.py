@@ -39,25 +39,25 @@
 class Assert:
 
     @classmethod
-    def equal(self, first, second):
-        assert first == second
+    def equal(self, first, second, msg=None):
+        assert first == second, msg
 
     @classmethod
-    def not_equal(self, first, second):
-        assert first != second
+    def not_equal(self, first, second, msg=None):
+        assert first != second, msg
 
     @classmethod
-    def true(self, first):
-        assert first is True
+    def true(self, first, msg=None):
+        assert first is True, msg
 
     @classmethod
-    def false(self, first):
-        assert first is False
+    def false(self, first, msg=None):
+        assert first is False, msg
 
     @classmethod
-    def none(self, first):
-        assert first is None
+    def none(self, first, msg=None):
+        assert first is None, msg
 
     @classmethod
-    def not_none(self, first):
-        assert first is not None
+    def not_none(self, first, msg=None):
+        assert first is not None, msg
