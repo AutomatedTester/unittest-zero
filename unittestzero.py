@@ -15,11 +15,11 @@
 # The Original Code is UnittestZero.
 #
 # The Initial Developer of the Original Code is
-# Mozilla Corp.
 # Portions created by the Initial Developer are Copyright (C) 2011
+
 # the Initial Developer. All Rights Reserved.
 #
-# Contributor(s): 
+# Contributor(s): David Burns
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
