@@ -90,3 +90,9 @@ class TestNewAsserts:
         Assert.not_none(1)
         Assert.not_none("a")
         Assert.not_none("a" in "bad")
+
+    def that_we_can_throw_when_we_fail(self):
+        try:
+            Assert.fail("omg!!!!")
+        except AssertionError as e:
+            pass
