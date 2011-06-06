@@ -1,8 +1,7 @@
-import os
-import sys
-from setuptools import setup, find_packages
+from setuptools import setup
+
 setup(name='UnittestZero',
-      version='0.1',
+      version='0.1.1',
       description='A simple Assertion Framework',
       author='David Burns',
       author_email='dburns at mozilladotcom',
@@ -16,4 +15,4 @@ setup(name='UnittestZero',
                   'Topic :: Software Development :: Testing',
                   'Topic :: Software Development :: Libraries',
                   'Programming Language :: Python'],
-      packages=find_packages())
+      py_modules=['unittestzero'])
