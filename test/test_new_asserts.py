@@ -19,7 +19,8 @@
 # Portions created by the Initial Developer are Copyright (C) 2011
 # the Initial Developer. All Rights Reserved.
 #
-# Contributor(s): David Burns 
+# Contributor(s): David Burns
+#                 Joel Andersson <janderssn@gmail.com>
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -95,4 +96,46 @@ class TestNewAsserts:
         try:
             Assert.fail("omg!!!!")
         except AssertionError as e:
+            pass
+
+    def test_is_sorted_ascending_success_1(self):
+        Assert.is_sorted_ascending([1])
+
+    def test_is_sorted_ascending_success_3(self):
+        Assert.is_sorted_ascending([1,2,3])
+    
+    def test_is_sorted_ascending_fail(self):
+        try:
+            Assert.is_sorted_ascending([1,3,2], "failure message")
+        except AssertionError as e:
+            assert e.msg == "failure message"
+
+    def test_is_sorted_ascending_empty(self):
+        Assert.is_sorted_ascending([])
+        
+    def test_is_sorted_ascending_none(self):
+        try:
+            Assert.is_sorted_ascending(None)
+        except TypeError as e:
+            pass
+
+    def test_is_sorted_descending_success_1(self):
+        Assert.is_sorted_descending([1])
+
+    def test_is_sorted_descending_success_3(self):
+        Assert.is_sorted_descending([3,2,1])
+    
+    def test_is_sorted_descending_fail(self):
+        try:
+            Assert.is_sorted_descending([3,1,2], "failure message")
+        except AssertionError as e:
+            assert e.msg == "failure message"
+
+    def test_is_sorted_descending_empty(self):
+        Assert.is_sorted_descending([])
+        
+    def test_is_sorted_descending_none(self):
+        try:
+            Assert.is_sorted_descending(None)
+        except TypeError as e:
             pass

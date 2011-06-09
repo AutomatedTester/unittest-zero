@@ -20,6 +20,7 @@
 # the Initial Developer. All Rights Reserved.
 #
 # Contributor(s): David Burns
+#                 Joel Andersson <janderssn@gmail.com>
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -65,3 +66,11 @@ class Assert:
     @classmethod
     def fail(self, msg):
         raise AssertionError(msg)
+    
+    @classmethod
+    def is_sorted_ascending(self, first, msg=None):
+        assert all(first[i] <= first[i + 1] for i in xrange(len(first) - 1)) is True, msg
+
+    @classmethod
+    def is_sorted_descending(self, first, msg=None):
+        assert all(first[i] >= first[i + 1] for i in xrange(len(first) - 1)) is True, msg
