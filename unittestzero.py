@@ -69,8 +69,8 @@ class Assert:
     
     @classmethod
     def is_sorted_ascending(self, first, msg=None):
-        assert all(first[i] <= first[i + 1] for i in xrange(len(first) - 1)) is True, msg
+        assert all([first[i] <= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
 
     @classmethod
     def is_sorted_descending(self, first, msg=None):
-        assert all(first[i] >= first[i + 1] for i in xrange(len(first) - 1)) is True, msg
+        assert all([first[i] >= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
