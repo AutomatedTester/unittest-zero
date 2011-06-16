@@ -74,3 +74,17 @@ class Assert:
     @classmethod
     def is_sorted_descending(self, first, msg=None):
         assert all([first[i] >= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
+        
+    @classmethod
+    def raises(self, exception, caller, msg=None, *args, **kwargs):
+        try:
+            caller(*args, **kwargs )
+        except exception:
+            return
+
+        if hasattr(exception,'__name__'):
+            excName = exception.__name__
+        else:
+            excName = str(exception)
+        
+        raise AssertionError("%s was not raised" % excName)

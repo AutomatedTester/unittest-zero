@@ -139,3 +139,19 @@ class TestNewAsserts:
             Assert.is_sorted_descending(None)
         except TypeError as e:
             pass
+
+    def test_that_assert_raises_catches_exceptions(self):
+        
+        Assert.raises(ZeroDivisionError, self._divide_by_zero)
+
+    def test_that_we_raise_when_error_not_thrown(self):
+        try:
+            Assert.raises(Exception, self._add_num, 5,4)
+        except AssertionError:
+            pass
+
+    def _divide_by_zero(self):
+        return 1/0
+
+    def _add_num(self, first, second):
+        return first + second
