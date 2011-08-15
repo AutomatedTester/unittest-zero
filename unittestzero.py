@@ -88,3 +88,10 @@ class Assert:
             excName = str(exception)
         
         raise AssertionError("%s was not raised" % excName)
+
+    @classmethod
+    def contains(self, needle, haystack):
+        try:
+            assert needle in haystack
+        except AssertionError:
+            raise AssertionError('%s not found in %s' % (needle, haystack))

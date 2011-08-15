@@ -150,6 +150,21 @@ class TestNewAsserts:
         except AssertionError:
             pass
 
+    def test_that_we_can_check_items_contain_something(self):
+        Assert.contains("a", "bad")
+        Assert.contains("a", ["a","b","c"])
+
+    def test_that_items_dont_contain_something(self):
+        try:
+            Assert.contains("a", "cde")
+        except AssertionError as e:
+            pass
+        try:
+            Assert.contains("d", ["a","b","c"])
+        except AssertionError as e:
+            pass
+
+
     def _divide_by_zero(self):
         return 1/0
 
