@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(name='UnittestZero',
-      version='0.1.4',
+      version='0.1.5',
       description='A simple Assertion Framework',
       author='David Burns',
       author_email='dburns at mozilladotcom',
-      url='https://github.com/AutomatedTester/UnittestZero',
+      url='https://github.com/AutomatedTester/Unittest-Zero',
       classifiers=['Development Status :: 3 - Alpha',
                   'Intended Audience :: Developers',
                   'License :: OSI Approved :: Mozilla Public License 1.1 (MPL 1.1)',
