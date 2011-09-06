@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='UnittestZero',
-      version='0.1.5',
+      version='0.1.6',
       description='A simple Assertion Framework',
       author='David Burns',
       author_email='dburns at mozilladotcom',
