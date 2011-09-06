@@ -98,17 +98,17 @@ class Assert:
             raise AssertionError('%s not found in %s' % (needle, haystack))
 
     @classmethod
-    def  less(self, first, second, msg=None):
-        assert first < second, '"%s" unexpectedly not less than "%s", %s' % (first, second, msg)
+    def less(self, first, second, msg=None):
+        assert first < second, '"%s" not less than "%s", %s' % (first, second, msg)
 
     @classmethod
-    def  greater(self, first, second, msg=None):
-        assert first > second, '"%s" unexpectedly not greater than "%s", %s' % (first, second, msg)
+    def greater(self, first, second, msg=None):
+        assert first > second, '"%s" not greater than "%s", %s' % (first, second, msg)
 
     @classmethod
-    def  less_equal(self, first, second, msg=None):
-        assert first <= second, '"%s" unexpectedly not less than or equal to "%s", %s' % (first, second, msg)
+    def less_equal(self, first, second, msg=None):
+        assert first <= second, '"%s" not less than or equal to "%s", %s' % (first, second, msg)
 
     @classmethod
-    def  greater_equal(self, first, second, msg=None):
-        assert first >= second, '"%s" unexpectedly not greater than or equal to "%s", %s' % (first, second, msg)
+    def greater_equal(self, first, second, msg=None):
+        assert first >= second, '"%s" not greater than or equal to "%s", %s' % (first, second, msg)
