@@ -99,16 +99,16 @@ class Assert:
 
     @classmethod
     def less(self, first, second, msg=None):
-        assert first < second, '"%s" is not less than "%s", %s' % (first, second, msg)
+        assert first < second, msg
 
     @classmethod
     def greater(self, first, second, msg=None):
-        assert first > second, '"%s" is not greater than "%s", %s' % (first, second, msg)
+        assert first > second, msg
 
     @classmethod
     def less_equal(self, first, second, msg=None):
-        assert first <= second, '"%s" is not less than or equal to "%s", %s' % (first, second, msg)
+        assert first <= second, msg
 
     @classmethod
     def greater_equal(self, first, second, msg=None):
-        assert first >= second, '"%s" is not greater than or equal to "%s", %s' % (first, second, msg)
+        assert first >= second, msg
