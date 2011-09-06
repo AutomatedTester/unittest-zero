@@ -21,6 +21,7 @@
 #
 # Contributor(s): David Burns
 #                 Joel Andersson <janderssn@gmail.com>
+#                 Bebe<florin.strugariu@softvision.ro>
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -66,7 +67,7 @@ class Assert:
     @classmethod
     def fail(self, msg):
         raise AssertionError(msg)
-    
+
     @classmethod
     def is_sorted_ascending(self, first, msg=None):
         assert all([first[i] <= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
@@ -74,19 +75,19 @@ class Assert:
     @classmethod
     def is_sorted_descending(self, first, msg=None):
         assert all([first[i] >= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
-        
+
     @classmethod
     def raises(self, exception, caller, msg=None, *args, **kwargs):
         try:
-            caller(*args, **kwargs )
+            caller(*args, **kwargs)
         except exception:
             return
 
-        if hasattr(exception,'__name__'):
+        if hasattr(exception, '__name__'):
             excName = exception.__name__
         else:
             excName = str(exception)
-        
+
         raise AssertionError("%s was not raised" % excName)
 
     @classmethod
@@ -95,3 +96,19 @@ class Assert:
             assert needle in haystack
         except AssertionError:
             raise AssertionError('%s not found in %s' % (needle, haystack))
+
+    @classmethod
+    def  less(self, first, second, msg=None):
+        assert first < second, '"%s" unexpectedly not less than "%s", %s' % (first, second, msg)
+
+    @classmethod
+    def  greater(self, first, second, msg=None):
+        assert first > second, '"%s" unexpectedly not greater than "%s", %s' % (first, second, msg)
+
+    @classmethod
+    def  less_equal(self, first, second, msg=None):
+        assert first <= second, '"%s" unexpectedly not less than or equal to "%s", %s' % (first, second, msg)
+
+    @classmethod
+    def  greater_equal(self, first, second, msg=None):
+        assert first >= second, '"%s" unexpectedly not greater than or equal to "%s", %s' % (first, second, msg)

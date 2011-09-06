@@ -39,11 +39,12 @@
 import pytest
 from unittestzero import Assert
 
+
 class TestNewAsserts:
 
     def test_that_are_equal(self):
-        Assert.equal("1","1")
-        Assert.equal(1,1)
+        Assert.equal("1", "1")
+        Assert.equal(1, 1)
 
     def test_that_are_not_equal_throws_error(self):
         try:
@@ -52,8 +53,8 @@ class TestNewAsserts:
             pass
 
     def test_that_items_are_not_equal(self):
-        Assert.not_equal("a","b")
-        Assert.not_equal(1,2)
+        Assert.not_equal("a", "b")
+        Assert.not_equal(1, 2)
 
     def test_that_we_can_check_for_true(self):
         Assert.true(True)
@@ -69,7 +70,7 @@ class TestNewAsserts:
     def test_that_we_can_check_for_false(self):
         Assert.false(False)
         Assert.false("z" in "bad")
-        Assert.false(1==2)
+        Assert.false(1 == 2)
 
     def test_that_we_get_an_exception_if_not_false(self):
         try:
@@ -79,7 +80,6 @@ class TestNewAsserts:
 
     def test_that_something_is_none(self):
         Assert.none(None)
-
 
     def test_that_if_not_none_exception_thrown(self):
         try:
@@ -102,17 +102,17 @@ class TestNewAsserts:
         Assert.is_sorted_ascending([1])
 
     def test_is_sorted_ascending_success_3(self):
-        Assert.is_sorted_ascending([1,2,3])
-    
+        Assert.is_sorted_ascending([1, 2, 3])
+
     def test_is_sorted_ascending_fail(self):
         try:
-            Assert.is_sorted_ascending([1,3,2], "failure message")
+            Assert.is_sorted_ascending([1, 3, 2], "failure message")
         except AssertionError as e:
             assert e.msg == "failure message"
 
     def test_is_sorted_ascending_empty(self):
         Assert.is_sorted_ascending([])
-        
+
     def test_is_sorted_ascending_none(self):
         try:
             Assert.is_sorted_ascending(None)
@@ -123,17 +123,17 @@ class TestNewAsserts:
         Assert.is_sorted_descending([1])
 
     def test_is_sorted_descending_success_3(self):
-        Assert.is_sorted_descending([3,2,1])
-    
+        Assert.is_sorted_descending([3, 2, 1])
+
     def test_is_sorted_descending_fail(self):
         try:
-            Assert.is_sorted_descending([3,1,2], "failure message")
+            Assert.is_sorted_descending([3, 1, 2], "failure message")
         except AssertionError as e:
             assert e.msg == "failure message"
 
     def test_is_sorted_descending_empty(self):
         Assert.is_sorted_descending([])
-        
+
     def test_is_sorted_descending_none(self):
         try:
             Assert.is_sorted_descending(None)
@@ -141,18 +141,18 @@ class TestNewAsserts:
             pass
 
     def test_that_assert_raises_catches_exceptions(self):
-        
+
         Assert.raises(ZeroDivisionError, self._divide_by_zero)
 
     def test_that_we_raise_when_error_not_thrown(self):
         try:
-            Assert.raises(Exception, self._add_num, 5,4)
+            Assert.raises(Exception, self._add_num, 5, 4)
         except AssertionError:
             pass
 
     def test_that_we_can_check_items_contain_something(self):
         Assert.contains("a", "bad")
-        Assert.contains("a", ["a","b","c"])
+        Assert.contains("a", ["a", "b", "c"])
 
     def test_that_items_dont_contain_something(self):
         try:
@@ -160,13 +160,128 @@ class TestNewAsserts:
         except AssertionError as e:
             pass
         try:
-            Assert.contains("d", ["a","b","c"])
+            Assert.contains("d", ["a", "b", "c"])
         except AssertionError as e:
             pass
 
+    def test_less_succes(self):
+        Assert.less("1", "2")
+        Assert.less(1, 2)
+
+    def test_less_fail_string(self):
+        try:
+            Assert.less("2", "1")
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than "1", None'
+
+    def test_less_fail_int(self):
+        try:
+            Assert.less(2, 1)
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than "1", None'
+
+    def test_less_fail_string_message(self):
+        try:
+            Assert.less("2", "1", "message")
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than "1", message'
+
+    def test_less_fail_int_message(self):
+        try:
+            Assert.less(2, 1, "message")
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than "1", message'
+
+    def test_greater_succes(self):
+        Assert.greater("2", "1")
+        Assert.greater(2, 1)
+
+    def test_greater_fail_string(self):
+        try:
+            Assert.greater("1", "2")
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than "2", None'
+
+    def test_greater_fail_int(self):
+        try:
+            Assert.greater(1, 2)
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than "2", None'
+
+    def test_greater_fail_string_message(self):
+        try:
+            Assert.greater("1", "2", "message")
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than "2", message'
+
+    def test_greater_fail_int_message(self):
+        try:
+            Assert.greater(1, 2, "message")
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than "2", message'
+
+    def test_greater_equal_succes(self):
+        Assert.greater_equal("2", "1")
+        Assert.greater_equal(2, 1)
+        Assert.greater_equal("1", "1")
+        Assert.greater_equal(1, 1)
+
+    def test_greater_equal_fail_string(self):
+        try:
+            Assert.greater_equal("1", "2")
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than or equal to "2", None'
+
+    def test_greater_equal_fail_int(self):
+        try:
+            Assert.greater_equal(1, 2)
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than or equal to "2", None'
+
+    def test_greater_equal_fail_string_message(self):
+        try:
+            Assert.greater_equal("1", "2", "message")
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than or equal to "2", message'
+
+    def test_greater_equal_fail_int_message(self):
+        try:
+            Assert.greater_equal(1, 2, "message")
+        except AssertionError, e:
+            assert e.msg == '"1" unexpectedly not greater than or equal to "2", message'
+
+    def test_less_equal_succes(self):
+        Assert.less_equal("1", "2")
+        Assert.less_equal(1, 2)
+        Assert.less_equal("1", "1")
+        Assert.less_equal(1, 1)
+
+    def test_less_equal_fail_string(self):
+        try:
+            Assert.less_equal("2", "1")
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than or equal to "1", None'
+
+    def test_less_equal_fail_int(self):
+        try:
+            Assert.less_equal(2, 1)
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than or equal to "1", None'
+
+    def test_less_equal_fail_string_message(self):
+        try:
+            Assert.less_equal("2", "1", "message")
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than or equal to "1", message'
+
+    def test_less_equal_fail_int_message(self):
+        try:
+            Assert.less_equal(2, 1, "message")
+        except AssertionError, e:
+            assert e.msg == '"2" unexpectedly not less than or equal to "1", message'
 
     def _divide_by_zero(self):
-        return 1/0
+        return 1 / 0
 
     def _add_num(self, first, second):
         return first + second
