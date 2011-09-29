@@ -108,7 +108,7 @@ class TestNewAsserts:
         try:
             Assert.is_sorted_ascending([1, 3, 2], "failure message")
         except AssertionError as e:
-            assert e.msg == "failure message"
+            assert e.msg == "2 is not before 3, failure message"
 
     def test_is_sorted_ascending_empty(self):
         Assert.is_sorted_ascending([])
@@ -129,7 +129,7 @@ class TestNewAsserts:
         try:
             Assert.is_sorted_descending([3, 1, 2], "failure message")
         except AssertionError as e:
-            assert e.msg == "failure message"
+            assert e.msg == "1 is not before 2, failure message"
 
     def test_is_sorted_descending_empty(self):
         Assert.is_sorted_descending([])

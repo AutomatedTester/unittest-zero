@@ -70,11 +70,13 @@ class Assert:
 
     @classmethod
     def is_sorted_ascending(self, first, msg=None):
-        assert all([first[i] <= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
+        for i in xrange(len(first) - 1):
+            assert first[i] <= first[i + 1], '%s is not before %s, %s' % (first[i + 1], first[i], msg)
 
     @classmethod
     def is_sorted_descending(self, first, msg=None):
-        assert all([first[i] >= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
+        for i in xrange(len(first) - 1):
+            assert first[i] >= first[i + 1], '%s is not before %s, %s' % (first[i], first[i + 1], msg)
 
     @classmethod
     def raises(self, exception, caller, msg=None, *args, **kwargs):
