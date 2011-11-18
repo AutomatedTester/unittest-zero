@@ -69,12 +69,14 @@ class Assert:
         raise AssertionError(msg)
 
     @classmethod
-    def is_sorted_ascending(self, first, msg=None):
-        assert all([first[i] <= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
+    def is_sorted_ascending(self, iterable, msg=''):
+        for i in xrange(len(iterable) - 1):
+            assert iterable[i] <= iterable[i + 1], '. '.join(['%s is not before %s' % (iterable[i + 1], iterable[i]), msg])
 
     @classmethod
-    def is_sorted_descending(self, first, msg=None):
-        assert all([first[i] >= first[i + 1] for i in xrange(len(first) - 1)]) is True, msg
+    def is_sorted_descending(self, iterable, msg=''):
+        for i in xrange(len(iterable) - 1):
+            assert iterable[i] >= iterable[i + 1], '. '.join(['%s is not before %s' % (iterable[i], iterable[i + 1]), msg])
 
     @classmethod
     def raises(self, exception, caller, msg=None, *args, **kwargs):
