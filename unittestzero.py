@@ -42,44 +42,123 @@ class Assert:
 
     @classmethod
     def equal(self, first, second, msg=None):
+        """
+        Asserts that 2 elements are the same
+
+        :Args:
+         - First object to be tested
+         - Second object to be tested
+         - Message that will be printed if it fails
+        """
         assert first == second, msg
 
     @classmethod
     def not_equal(self, first, second, msg=None):
+        """
+        Asserts that 2 elements are the same
+
+        :Args:
+         - First object to be tested
+         - Second object to be tested
+         - Message that will be printed if it fails
+        """
         assert first != second, msg
 
     @classmethod
     def true(self, first, msg=None):
+        """
+        Asserts that what is given is equal to True 
+
+        :Args:
+         - First object to be tested
+         - Message that will be printed if it fails
+        """
+
         assert first is True, msg
 
     @classmethod
     def false(self, first, msg=None):
+        """
+        Asserts that what is given is equal to False 
+
+        :Args:
+         - First object to be tested
+         - Message that will be printed if it fails
+        """
+
         assert first is False, msg
 
     @classmethod
     def none(self, first, msg=None):
+        """
+        Asserts that what is given is equal to None 
+
+        :Args:
+         - First object to be tested
+         - Message that will be printed if it fails
+        """
+
         assert first is None, msg
 
     @classmethod
     def not_none(self, first, msg=None):
+        """
+        Asserts that what is given is not equal to None 
+
+        :Args:
+         - First object to be tested
+         - Message that will be printed if it fails
+        """
+
         assert first is not None, msg
 
     @classmethod
     def fail(self, msg):
+        """
+        Raises an assertion error with a message passed in
+        
+        :Args:
+         - Message that will be printed
+        """
         raise AssertionError(msg)
 
     @classmethod
     def is_sorted_ascending(self, iterable, msg=''):
+        """
+        Goes through a list and asserts that items in the list are sorted ascendingly
+
+        :Args:
+         - List that will be asserted against
+         - Message that will be printed if it fails
+        """
         for i in xrange(len(iterable) - 1):
             assert iterable[i] <= iterable[i + 1], '. '.join(['%s is not before %s' % (iterable[i + 1], iterable[i]), msg])
 
     @classmethod
     def is_sorted_descending(self, iterable, msg=''):
+        """
+        Goes through a list and asserts that items in the list are sorted descendingly
+
+        :Args:
+         - List that will be asserted against
+         - Message that will be printed if it fails
+        """
+
         for i in xrange(len(iterable) - 1):
             assert iterable[i] >= iterable[i + 1], '. '.join(['%s is not before %s' % (iterable[i], iterable[i + 1]), msg])
 
     @classmethod
     def raises(self, exception, caller, msg=None, *args, **kwargs):
+        """
+        Asserts that an Error is raised when calling a method
+
+        :Args:
+         - Error class
+         - method to be called
+         - Message that will be printed if it fails
+         - args that will be passed to the caller
+         - kwargs that will be passed to the caller
+        """
         try:
             caller(*args, **kwargs)
         except exception:
@@ -101,16 +180,51 @@ class Assert:
 
     @classmethod
     def less(self, first, second, msg=None):
+        """
+        Asserts that first element is < the second element
+
+        :Args:
+         - First object to be tested
+         - Second object to be tested
+         - Message that will be printed if it fails
+        """
         assert first < second, msg
 
     @classmethod
     def greater(self, first, second, msg=None):
+        """
+        Asserts that first element is greater than the second element
+
+        :Args:
+         - First object to be tested
+         - Second object to be tested
+         - Message that will be printed if it fails
+        """
+
         assert first > second, msg
 
     @classmethod
     def less_equal(self, first, second, msg=None):
+        """
+        Asserts that the first element is <= to the second element
+
+        :Args:
+         - First object to be tested
+         - Second object to be tested
+         - Message that will be printed if it fails
+        """
+
         assert first <= second, msg
 
     @classmethod
     def greater_equal(self, first, second, msg=None):
+        """
+        Asserts that first element is >= to the send element 
+
+        :Args:
+         - First object to be tested
+         - Second object to be tested
+         - Message that will be printed if it fails
+        """
+
         assert first >= second, msg
