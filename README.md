@@ -19,3 +19,8 @@ built to be used with py.test. Documentation can be found [here](http://automate
 Update your PYTHONPATH to the directory and then its a simple 
     py.test . 
 in the the tests folder
+
+## Continuous Integration ##
+
+[![Build
+Status](https://secure.travis-ci.org/AutomatedTester/unittest-zero.png?branch=master)](http://travis-ci.org/AutomatedTester/unittest-zero)
