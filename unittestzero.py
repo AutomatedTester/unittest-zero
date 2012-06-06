@@ -148,17 +148,20 @@ class Assert:
             assert iterable[i] >= iterable[i + 1], '. '.join(['%s is not before %s' % (iterable[i], iterable[i + 1]), msg])
 
     @classmethod
-    def raises(self, exception, caller, msg=None, *args, **kwargs):
+    def raises(self, exception, caller, *args, **kwargs):
         """
         Asserts that an Error is raised when calling a method
 
         :Args:
          - Error class
          - method to be called
-         - Message that will be printed if it fails
          - args that will be passed to the caller
          - kwargs that will be passed to the caller
+         - msg named arg - text that will be printed if it fails,
+           will not be sent to caller
         """
+        msg = kwargs.pop('msg', '')
+
         try:
             caller(*args, **kwargs)
         except exception:
@@ -169,7 +172,7 @@ class Assert:
         else:
             excName = str(exception)
 
-        raise AssertionError("%s was not raised" % excName)
+        raise AssertionError("%s was not raised. %s" % (excName, msg))
 
     @classmethod
     def contains(self, needle, haystack, msg=''):
