@@ -172,11 +172,11 @@ class Assert:
         raise AssertionError("%s was not raised" % excName)
 
     @classmethod
-    def contains(self, needle, haystack):
+    def contains(self, needle, haystack, msg=''):
         try:
             assert needle in haystack
         except AssertionError:
-            raise AssertionError('%s is not found in %s' % (needle, haystack))
+            raise AssertionError('%s is not found in %s. %s' % (needle, haystack, msg))
 
     @classmethod
     def less(self, first, second, msg=None):

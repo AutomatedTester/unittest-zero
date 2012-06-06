@@ -166,16 +166,27 @@ class TestNewAsserts:
     def test_that_we_can_check_items_contain_something(self):
         Assert.contains("a", "bad")
         Assert.contains("a", ["a", "b", "c"])
+        Assert.contains("dog", { "dog": "poodle", "cat": "siamese", "horse": "arabian",})
 
-    def test_that_items_dont_contain_something(self):
+    def test_that_string_does_not_contain_letter(self):
         try:
             Assert.contains("a", "cde")
         except AssertionError as e:
             pass
+
+    def test_that_list_does_not_contain_element_failure_no_message(self):
         try:
             Assert.contains("d", ["a", "b", "c"])
         except AssertionError as e:
-            pass
+            Assert.equal(e.msg, "d is not found in ['a', 'b', 'c']. ")
+
+    def test_dict_does_not_contain_key_failure_with_message(self):
+        try:
+            Assert.contains("dog", { "cat": "siamese", "horse": "arabian", }, 
+                msg="failure message")
+        except AssertionError as e:
+            Assert.equal(e.msg, 
+                "dog is not found in {'horse': 'arabian', 'cat': 'siamese'}. failure message")
 
     def test_less_success(self):
         Assert.less("1", "2")
