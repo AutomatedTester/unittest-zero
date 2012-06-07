@@ -160,7 +160,7 @@ class Assert:
          - msg named arg - text that will be printed if it fails,
            will not be sent to caller
         """
-        msg = kwargs.pop('msg', '')
+        msg = kwargs.get('msg', '')
 
         try:
             caller(*args, **kwargs)
