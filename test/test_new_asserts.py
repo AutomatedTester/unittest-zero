@@ -163,6 +163,18 @@ class TestNewAsserts:
         except AssertionError:
             pass
 
+    def test_raises_failure_with_message(self):
+        try:
+            Assert.raises(Exception, self._add_num, 5, 4, msg="failure message")
+        except AssertionError as e:
+            Assert.equal(e.msg, "Exception was not raised. failure message")
+
+    def test_raises_failure_without_message(self):
+        try:
+            Assert.raises(Exception, self._add_num, 5, 4,)
+        except AssertionError as e:
+            Assert.equal(e.msg, "Exception was not raised. ")
+
     def test_that_we_can_check_items_contain_something(self):
         Assert.contains("a", "bad")
         Assert.contains("a", ["a", "b", "c"])
