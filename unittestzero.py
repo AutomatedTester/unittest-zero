@@ -67,7 +67,7 @@ class Assert:
     @classmethod
     def true(self, first, msg=None):
         """
-        Asserts that what is given is equal to True 
+        Asserts that what is given is equal to True
 
         :Args:
          - First object to be tested
@@ -79,7 +79,7 @@ class Assert:
     @classmethod
     def false(self, first, msg=None):
         """
-        Asserts that what is given is equal to False 
+        Asserts that what is given is equal to False
 
         :Args:
          - First object to be tested
@@ -91,7 +91,7 @@ class Assert:
     @classmethod
     def none(self, first, msg=None):
         """
-        Asserts that what is given is equal to None 
+        Asserts that what is given is equal to None
 
         :Args:
          - First object to be tested
@@ -103,7 +103,7 @@ class Assert:
     @classmethod
     def not_none(self, first, msg=None):
         """
-        Asserts that what is given is not equal to None 
+        Asserts that what is given is not equal to None
 
         :Args:
          - First object to be tested
@@ -116,7 +116,7 @@ class Assert:
     def fail(self, msg):
         """
         Raises an assertion error with a message passed in
-        
+
         :Args:
          - Message that will be printed
         """
@@ -222,7 +222,7 @@ class Assert:
     @classmethod
     def greater_equal(self, first, second, msg=None):
         """
-        Asserts that first element is >= to the send element 
+        Asserts that first element is >= to the second element
 
         :Args:
          - First object to be tested
@@ -231,3 +231,16 @@ class Assert:
         """
 
         assert first >= second, msg
+
+    @classmethod
+    def endswith(self, string, suffix, msg=None):
+        """
+        Asserts that first string ends with the second suffix
+
+        :Args:
+         - String to test
+         - String suffix should be at the end of the string
+         - Message that will be printed if it fails
+        """
+
+        assert string.endswith(suffix), msg
