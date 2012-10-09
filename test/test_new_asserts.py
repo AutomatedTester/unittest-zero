@@ -116,7 +116,6 @@ class TestNewAsserts:
         except AssertionError as e:
             assert e.msg == "2 is not before 3. "
 
-
     def test_is_sorted_ascending_empty(self):
         Assert.is_sorted_ascending([])
 
@@ -178,7 +177,7 @@ class TestNewAsserts:
     def test_that_we_can_check_items_contain_something(self):
         Assert.contains("a", "bad")
         Assert.contains("a", ["a", "b", "c"])
-        Assert.contains("dog", { "dog": "poodle", "cat": "siamese", "horse": "arabian",})
+        Assert.contains("dog", {"dog": "poodle", "cat": "siamese", "horse": "arabian"})
 
     def test_that_string_does_not_contain_letter(self):
         try:
@@ -194,11 +193,11 @@ class TestNewAsserts:
 
     def test_dict_does_not_contain_key_failure_with_message(self):
         try:
-            Assert.contains("dog", { "cat": "siamese", "horse": "arabian", }, 
-                msg="failure message")
+            Assert.contains("dog", {"cat": "siamese", "horse": "arabian"},
+                            msg="failure message")
         except AssertionError as e:
-            Assert.equal(e.msg, 
-                "dog is not found in {'horse': 'arabian', 'cat': 'siamese'}. failure message")
+            Assert.equal(e.msg,
+                         "dog is not found in {'horse': 'arabian', 'cat': 'siamese'}. failure message")
 
     def test_less_success(self):
         Assert.less("1", "2")
@@ -208,13 +207,13 @@ class TestNewAsserts:
         try:
             Assert.less("2", "1")
         except AssertionError, e:
-            pass 
+            pass
 
     def test_less_fail_int(self):
         try:
             Assert.less(2, 1)
         except AssertionError, e:
-            pass 
+            pass
 
     def test_less_fail_string_message(self):
         try:
@@ -242,7 +241,7 @@ class TestNewAsserts:
         try:
             Assert.greater(1, 2)
         except AssertionError, e:
-           pass 
+            pass
 
     def test_greater_fail_string_message(self):
         try:
@@ -254,7 +253,7 @@ class TestNewAsserts:
         try:
             Assert.greater(1, 2, "message")
         except AssertionError, e:
-           pass 
+            pass
 
     def test_greater_equal_success(self):
         Assert.greater_equal("2", "1")
@@ -266,7 +265,7 @@ class TestNewAsserts:
         try:
             Assert.greater_equal("1", "2")
         except AssertionError, e:
-            pass 
+            pass
 
     def test_greater_equal_fail_int(self):
         try:
@@ -284,7 +283,7 @@ class TestNewAsserts:
         try:
             Assert.greater_equal(1, 2, "message")
         except AssertionError, e:
-            pass 
+            pass
 
     def test_less_equal_success(self):
         Assert.less_equal("1", "2")
@@ -296,7 +295,7 @@ class TestNewAsserts:
         try:
             Assert.less_equal("2", "1")
         except AssertionError, e:
-            pass 
+            pass
 
     def test_less_equal_fail_int(self):
         try:
@@ -308,11 +307,21 @@ class TestNewAsserts:
         try:
             Assert.less_equal("2", "1", "message")
         except AssertionError, e:
-            pass 
+            pass
 
     def test_less_equal_fail_int_message(self):
         try:
             Assert.less_equal(2, 1, "message")
+        except AssertionError, e:
+            pass
+
+    def test_endswith_success(self):
+        Assert.endswith("abcde", "de")
+        Assert.endswith("abcde", "abcde")
+
+    def test_endswith_fail(self):
+        try:
+            Assert.endswith("abcde", "abc")
         except AssertionError, e:
             pass
 
