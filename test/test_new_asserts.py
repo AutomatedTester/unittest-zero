@@ -325,6 +325,10 @@ class TestNewAsserts:
         except AssertionError, e:
             pass
 
+    def test_that_objects_asserted_for_bool_return_correctly(self):
+        mydict = {"mykey":"123"}
+        Assert.true(mydict['mykey'])
+
     def _divide_by_zero(self):
         return 1 / 0
 

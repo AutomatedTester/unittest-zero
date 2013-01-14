@@ -74,7 +74,7 @@ class Assert:
          - Message that will be printed if it fails
         """
 
-        assert first is True, msg
+        assert bool(first) is True, msg
 
     @classmethod
     def false(self, first, msg=None):
@@ -86,7 +86,7 @@ class Assert:
          - Message that will be printed if it fails
         """
 
-        assert first is False, msg
+        assert bool(first) is False, msg
 
     @classmethod
     def none(self, first, msg=None):
