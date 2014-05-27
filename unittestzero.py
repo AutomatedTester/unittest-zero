@@ -38,7 +38,7 @@
 # ***** END LICENSE BLOCK *****
 
 
-class Assert:
+class Assert(object):
 
     @classmethod
     def equal(self, first, second, msg=None):
