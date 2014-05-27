@@ -36,21 +36,25 @@
 #
 # ***** END LICENSE BLOCK *****
 
-import pytest
 from unittestzero import Assert
 
 
-class TestNewAsserts:
+def raises_(expected_exc, fun, *args, **kwargs):
+    try:
+        fun(*args, **kwargs)
+    except Exception as exc:
+        assert type(exc) == expected_exc
+        return
+    raise AssertionError("Exception %s not raised" % expected_exc.__name__)
 
+
+class TestNewAsserts(object):
     def test_that_are_equal(self):
         Assert.equal("1", "1")
         Assert.equal(1, 1)
 
     def test_that_are_not_equal_throws_error(self):
-        try:
-            Assert.equal("1", "2")
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.equal, "1", "2")
 
     def test_that_items_are_not_equal(self):
         Assert.not_equal("a", "b")
@@ -62,10 +66,7 @@ class TestNewAsserts:
         Assert.true(1 == 1)
 
     def test_that_get_an_exception_if_not_true(self):
-        try:
-            Assert.true(False)
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.true, False)
 
     def test_that_we_can_check_for_false(self):
         Assert.false(False)
@@ -73,19 +74,13 @@ class TestNewAsserts:
         Assert.false(1 == 2)
 
     def test_that_we_get_an_exception_if_not_false(self):
-        try:
-            Assert.false(True)
-        except:
-            pass
+        raises_(AssertionError, Assert.false, True)
 
     def test_that_something_is_none(self):
         Assert.none(None)
 
     def test_that_if_not_none_exception_thrown(self):
-        try:
-            Assert.none(1)
-        except:
-            pass
+        raises_(AssertionError, Assert.none, 1)
 
     def test_that_not_none_passes(self):
         Assert.not_none(1)
@@ -93,10 +88,7 @@ class TestNewAsserts:
         Assert.not_none("a" in "bad")
 
     def that_we_can_throw_when_we_fail(self):
-        try:
-            Assert.fail("omg!!!!")
-        except AssertionError as e:
-            pass
+        raises_(AssertionError, Assert.fail, "omg!!!!")
 
     def test_is_sorted_ascending_success_1(self):
         Assert.is_sorted_ascending([1])
@@ -120,10 +112,7 @@ class TestNewAsserts:
         Assert.is_sorted_ascending([])
 
     def test_is_sorted_ascending_none(self):
-        try:
-            Assert.is_sorted_ascending(None)
-        except TypeError as e:
-            pass
+        raises_(TypeError, Assert.is_sorted_ascending, None)
 
     def test_is_sorted_descending_success_1(self):
         Assert.is_sorted_descending([1])
@@ -147,20 +136,13 @@ class TestNewAsserts:
         Assert.is_sorted_descending([])
 
     def test_is_sorted_descending_none(self):
-        try:
-            Assert.is_sorted_descending(None)
-        except TypeError as e:
-            pass
+        raises_(TypeError, Assert.is_sorted_descending, None)
 
     def test_that_assert_raises_catches_exceptions(self):
-
         Assert.raises(ZeroDivisionError, self._divide_by_zero)
 
     def test_that_we_raise_when_error_not_thrown(self):
-        try:
-            Assert.raises(Exception, self._add_num, 5, 4)
-        except AssertionError:
-            pass
+        raises_(AssertionError, Assert.raises, Exception, self._add_num, 5, 4)
 
     def test_raises_failure_with_message(self):
         try:
@@ -180,10 +162,7 @@ class TestNewAsserts:
         Assert.contains("dog", {"dog": "poodle", "cat": "siamese", "horse": "arabian"})
 
     def test_that_string_does_not_contain_letter(self):
-        try:
-            Assert.contains("a", "cde")
-        except AssertionError as e:
-            pass
+        raises_(AssertionError, Assert.contains, "a", "cde")
 
     def test_that_list_does_not_contain_element_failure_no_message(self):
         try:
@@ -204,56 +183,44 @@ class TestNewAsserts:
         Assert.less(1, 2)
 
     def test_less_fail_string(self):
-        try:
-            Assert.less("2", "1")
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.less, "2", "1")
 
     def test_less_fail_int(self):
-        try:
-            Assert.less(2, 1)
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.less, 2, 1)
 
     def test_less_fail_string_message(self):
         try:
             Assert.less("2", "1", "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_less_fail_int_message(self):
         try:
             Assert.less(2, 1, "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_greater_success(self):
         Assert.greater("2", "1")
         Assert.greater(2, 1)
 
     def test_greater_fail_string(self):
-        try:
-            Assert.greater("1", "2")
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.greater, "1", "2")
 
     def test_greater_fail_int(self):
-        try:
-            Assert.greater(1, 2)
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.greater, 1, 2)
 
     def test_greater_fail_string_message(self):
         try:
             Assert.greater("1", "2", "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_greater_fail_int_message(self):
         try:
             Assert.greater(1, 2, "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_greater_equal_success(self):
         Assert.greater_equal("2", "1")
@@ -262,28 +229,22 @@ class TestNewAsserts:
         Assert.greater_equal(1, 1)
 
     def test_greater_equal_fail_string(self):
-        try:
-            Assert.greater_equal("1", "2")
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.greater_equal, "1", "2")
 
     def test_greater_equal_fail_int(self):
-        try:
-            Assert.greater_equal(1, 2)
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.greater_equal, 1, 2)
 
     def test_greater_equal_fail_string_message(self):
         try:
             Assert.greater_equal("1", "2", "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_greater_equal_fail_int_message(self):
         try:
             Assert.greater_equal(1, 2, "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_less_equal_success(self):
         Assert.less_equal("1", "2")
@@ -292,38 +253,29 @@ class TestNewAsserts:
         Assert.less_equal(1, 1)
 
     def test_less_equal_fail_string(self):
-        try:
-            Assert.less_equal("2", "1")
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.less_equal, "2", "1")
 
     def test_less_equal_fail_int(self):
-        try:
-            Assert.less_equal(2, 1)
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.less_equal, 2, 1)
 
     def test_less_equal_fail_string_message(self):
         try:
             Assert.less_equal("2", "1", "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_less_equal_fail_int_message(self):
         try:
             Assert.less_equal(2, 1, "message")
-        except AssertionError, e:
-            pass
+        except AssertionError as e:
+            Assert.equal(e.msg, "message")
 
     def test_endswith_success(self):
         Assert.endswith("abcde", "de")
         Assert.endswith("abcde", "abcde")
 
     def test_endswith_fail(self):
-        try:
-            Assert.endswith("abcde", "abc")
-        except AssertionError, e:
-            pass
+        raises_(AssertionError, Assert.endswith, "abcde", "abc")
 
     def test_that_objects_asserted_for_bool_return_correctly(self):
         mydict = {"mykey":"123"}
