@@ -96,6 +96,11 @@ class TestNewAsserts(object):
     def test_is_sorted_ascending_success_3(self):
         Assert.is_sorted_ascending([1, 2, 3])
 
+    def test_is_sorted_ascending_icase(self):
+        args = ['a', 'B', 'c']
+        raises_(AssertionError, Assert.is_sorted_ascending, args)
+        Assert.is_sorted_ascending(args, icase=True)
+
     def test_is_sorted_ascending_fail(self):
         try:
             Assert.is_sorted_ascending([1, 3, 2], "failure message")
@@ -119,6 +124,11 @@ class TestNewAsserts(object):
 
     def test_is_sorted_descending_success_3(self):
         Assert.is_sorted_descending([3, 2, 1])
+
+    def test_is_sorted_descending_icase(self):
+        args = ['c', 'B', 'a']
+        raises_(AssertionError, Assert.is_sorted_descending, args)
+        Assert.is_sorted_descending(args, icase=True)
 
     def test_is_sorted_descending_fail(self):
         try:

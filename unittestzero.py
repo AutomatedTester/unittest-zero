@@ -37,6 +37,8 @@
 #
 # ***** END LICENSE BLOCK *****
 
+import string
+
 
 class Assert(object):
 
@@ -123,28 +125,35 @@ class Assert(object):
         raise AssertionError(msg)
 
     @classmethod
-    def is_sorted_ascending(self, iterable, msg=''):
+    def is_sorted_ascending(self, iterable, msg='', icase=False):
         """
         Goes through a list and asserts that items in the list are sorted ascendingly
 
         :Args:
          - List that will be asserted against
          - Message that will be printed if it fails
+         - Whether or not to ignore case
         """
-        for i in xrange(len(iterable) - 1):
+        if icase:
+            iterable = map(string.lower, iterable)
+
+        for i, item in enumerate(iterable[:-1]):
             assert iterable[i] <= iterable[i + 1], '. '.join(['%s is not before %s' % (iterable[i + 1], iterable[i]), msg])
 
     @classmethod
-    def is_sorted_descending(self, iterable, msg=''):
+    def is_sorted_descending(self, iterable, msg='', icase=False):
         """
         Goes through a list and asserts that items in the list are sorted descendingly
 
         :Args:
          - List that will be asserted against
          - Message that will be printed if it fails
+         - Whether or not to ignore case
         """
+        if icase:
+            iterable = map(string.lower, iterable)
 
-        for i in xrange(len(iterable) - 1):
+        for i, item in enumerate(iterable[:-1]):
             assert iterable[i] >= iterable[i + 1], '. '.join(['%s is not before %s' % (iterable[i], iterable[i + 1]), msg])
 
     @classmethod
